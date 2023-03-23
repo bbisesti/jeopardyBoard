@@ -1,4 +1,3 @@
-
 function gameBoard() {
 
     let game = getGame();
@@ -151,6 +150,7 @@ function showBoard() {
         title.style = `
             text-decoration: underline;
             color: white;
+            border: 1px solid white;
         `
         
         categoryDiv.appendChild(title);
@@ -196,6 +196,196 @@ function questionAnswered(q) {
     })
 
     return answered;
+}
+
+function showDailyDoubleFanfare() {
+
+    // play audio
+    let audio = new Audio('src/sounds/Ring08.wav');
+    audio.play();
+
+    let modal = document.createElement('div');
+    modal.style = `
+        width: 480px;
+        height: 267px;
+    `
+
+    let modalContent = document.createElement('iframe');
+    modalContent.src = 'https://giphy.com/embed/2yvoIFyZghBDszbIk3'
+    modalContent.width = '480'
+    modalContent.height = '267'
+    console.log(modalContent)
+    
+    modal.appendChild(modalContent);
+
+    document.getElementById('modalSection').appendChild(
+        showJeopardyModal(modal)
+    );
+
+}
+
+function showGameQuestion(c,q) {
+
+    let modal = document.createElement('div');
+
+    if(q.dailyDouble) {
+
+        showDailyDoubleFanfare()
+        setTimeout(() =>{ 
+            closeModal();
+            modal = showBettingQuestion(c,q)
+
+            document.getElementById('modalSection').appendChild(
+                showJeopardyModal(modal)
+            );
+        }
+        ,3000)
+
+    } else {
+
+    let modalContent = document.createElement('div');
+    modalContent.id = q.id+'jeopardyQuestion'
+    modalContent.className = 'jeopardyCardLarge'
+
+    modalContent.innerHTML = q.question;
+    modal.appendChild(modalContent)
+
+    // add footer
+    let footer = document.createElement('div');
+    footer.style = `
+        width: 98.3%;
+        display: inline-flex;
+        gap: 10px;
+        justify-content: center;
+        padding: 5px;
+        background-color: white;
+        color: black;
+        border-radius-bottom-right: 5px;
+        border-radius-botom-left: 5px;
+    `
+
+    let game = getGame();
+
+    game.teams.forEach((t) => {
+
+        let teamButton = document.createElement('div')
+        teamButton.style = `
+            display: flex;
+            flex-grow: 1;
+            padding: 10px;
+            align-self: center;
+            align-content: center;
+            justify-content: center;
+            color: white;
+            background-color: ` + t.color +`;
+        `
+        teamButton.innerHTML = t.name;
+        teamButton.onclick = () => updateTeamScore(t,c,q);
+
+        footer.appendChild(teamButton)
+
+    })
+    
+    modal.appendChild(footer);
+
+    document.getElementById('modalSection').appendChild(
+        showJeopardyModal(modal)
+    );
+
+    }
+
+    
+}
+
+function updateTeamScore(team,category,question) {
+
+
+    let game = getGame();
+
+    // update team questions
+    game.teams.forEach((t) => {
+        if(t.id == team.id) {
+            t.questions.push(question);
+        }
+    })
+
+    writeGame(game);
+    showPage(gameBoard);
+    closeModal();
+
+}
+
+function openTeamHistory(team) {
+
+    let modal = document.createElement('div');
+    modal.style = `
+        width: 100%;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3,200px);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        gap: 20px;
+        color: yellow;
+        font-weight: bold;
+        text-align: center;
+    `
+
+    // add team question history
+    team.questions.forEach((q) => {
+        let b = document.createElement('div')
+        b.style = `
+            border-radius: 5px;
+            display: flex;
+            background-color: blue;
+            padding: 10px;
+        `;
+
+        // add name
+        let name = document.createElement('div');
+        name.style = `
+            flex-grow: 1;
+        `
+        name.innerHTML = q.question + ' | ' + q.value;
+        b.appendChild(name);
+
+        // add close
+        let close = document.createElement('span');
+        close.style = `
+            font-size: 20px;
+            font-weight: bold;
+        `;
+        close.innerHTML = '&times;';
+        close.onclick = () => removeTeamQuestion(team,q);
+        b.appendChild(close);
+
+        modal.appendChild(b);
+    })
+    
+
+    document.getElementById('modalSection').appendChild(
+        showModal(modal)
+    );
+
+}
+
+function removeTeamQuestion(team,question) {
+
+    let game = getGame();
+
+    game.teams.forEach((t) => {
+        if(t.id == team.id) {
+            t.questions.forEach((q,i) => {
+                if(q.id == question.id) {
+                    t.questions.splice(i,1);
+                }
+            })
+        }
+    })
+
+    writeGame(game);
+    showPage(gameBoard);
+    closeModal()
 }
 
 function showBettingQuestion(c,q) {
@@ -315,159 +505,4 @@ function applyCurrentBet(teamId,question,correct) {
     writeGame(game)
     showPage(gameBoard)
     alert('Score applied!')
-}
-
-function showGameQuestion(c,q) {
-
-    let modal = document.createElement('div');
-
-    if(q.dailyDouble) {
-    
-        modal = showBettingQuestion(c,q);
-
-    } else {
-
-    let modalContent = document.createElement('div');
-    modalContent.id = q.id+'jeopardyQuestion'
-    modalContent.className = 'jeopardyCardLarge'
-
-    modalContent.innerHTML = q.question;
-    modal.appendChild(modalContent)
-
-    // add footer
-    let footer = document.createElement('div');
-    footer.style = `
-        width: 98.3%;
-        display: inline-flex;
-        gap: 10px;
-        justify-content: center;
-        padding: 5px;
-        background-color: white;
-        color: black;
-        border-radius-bottom-right: 5px;
-        border-radius-botom-left: 5px;
-    `
-
-    let game = getGame();
-
-    game.teams.forEach((t) => {
-
-        let teamButton = document.createElement('div')
-        teamButton.style = `
-            display: flex;
-            flex-grow: 1;
-            padding: 10px;
-            align-self: center;
-            align-content: center;
-            justify-content: center;
-            color: white;
-            background-color: ` + t.color +`;
-        `
-        teamButton.innerHTML = t.name;
-        teamButton.onclick = () => updateTeamScore(t,c,q);
-
-        footer.appendChild(teamButton)
-
-    })
-    
-    modal.appendChild(footer);
-
-    }
-
-    document.getElementById('modalSection').appendChild(
-        showJeopardyModal(modal)
-    );
-
-    
-}
-
-function updateTeamScore(team,category,question) {
-
-
-    let game = getGame();
-
-    // update team questions
-    game.teams.forEach((t) => {
-        if(t.id == team.id) {
-            t.questions.push(question);
-        }
-    })
-
-    writeGame(game);
-    showPage(gameBoard);
-    closeModal();
-
-}
-
-function openTeamHistory(team) {
-
-    let modal = document.createElement('div');
-    modal.style = `
-        width: 100%;
-        padding: 10px;
-        display: grid;
-        grid-template-columns: repeat(3,200px);
-        margin-top: 20px;
-        margin-bottom: 20px;
-        gap: 20px;
-        color: yellow;
-        font-weight: bold;
-        text-align: center;
-    `
-
-    // add team question history
-    team.questions.forEach((q) => {
-        let b = document.createElement('div')
-        b.style = `
-            border-radius: 5px;
-            display: flex;
-            background-color: blue;
-            padding: 10px;
-        `;
-
-        // add name
-        let name = document.createElement('div');
-        name.style = `
-            flex-grow: 1;
-        `
-        name.innerHTML = q.question + ' | ' + q.value;
-        b.appendChild(name);
-
-        // add close
-        let close = document.createElement('span');
-        close.style = `
-            font-size: 20px;
-            font-weight: bold;
-        `;
-        close.innerHTML = '&times;';
-        close.onclick = () => removeTeamQuestion(team,q);
-        b.appendChild(close);
-
-        modal.appendChild(b);
-    })
-    
-
-    document.getElementById('modalSection').appendChild(
-        showModal(modal)
-    );
-
-}
-
-function removeTeamQuestion(team,question) {
-
-    let game = getGame();
-
-    game.teams.forEach((t) => {
-        if(t.id == team.id) {
-            t.questions.forEach((q,i) => {
-                if(q.id == question.id) {
-                    t.questions.splice(i,1);
-                }
-            })
-        }
-    })
-
-    writeGame(game);
-    showPage(gameBoard);
-    closeModal()
 }

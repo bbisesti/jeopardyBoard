@@ -207,7 +207,6 @@ function removeCategory(category) {
 
 
 function addQuestion(category,question,answer,type,value,dailyDouble) {
-    console.log(dailyDouble)
 
     let game = getGame();
 

@@ -259,7 +259,6 @@ function createButton(id,label,onClick) {
 
 function createScoreCard(team,onClick=null) {
 
-    console.log(onClick)
     let card = document.createElement('div');
     card.id = team.name + 'scoreCard'
     if(onClick) {
@@ -604,7 +603,6 @@ function createSelectInput(id,label,options,initialValue,onChange) {
     This function creates an text area group
 */
 function createCheckboxInput(id,label,initialValue,onChange) {
-    console.log(initialValue)
 
     let checkInput = document.createElement('div');
 
