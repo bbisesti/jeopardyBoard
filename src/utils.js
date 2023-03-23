@@ -257,10 +257,14 @@ function createButton(id,label,onClick) {
     return button;
 }
 
-function createScoreCard(team,onClick) {
+function createScoreCard(team,onClick=null) {
 
+    console.log(onClick)
     let card = document.createElement('div');
     card.id = team.name + 'scoreCard'
+    if(onClick) {
+        card.onclick = onClick
+    }
     card.style = `
     align-items: center;
     justify-content: center;
@@ -272,7 +276,6 @@ function createScoreCard(team,onClick) {
     color: white;
     
     `;
-    card.onclick = onclick;
     
     let name = document.createElement('div');
     name.style = `
