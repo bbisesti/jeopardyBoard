@@ -49,6 +49,12 @@ function createGame() {
 
     
     game.game = newGame;
+
+    // blank out team answers
+    game.teams.forEach((t) => {
+        t.questions = [];
+    })
+
     writeGame(game);
 
 
@@ -530,6 +536,42 @@ function createSelectInput(id,label,options,initialValue,onChange) {
     selectInput.appendChild(select);
 
     return selectInput;
+
+} 
+
+/*
+    This function creates an text area group
+*/
+function createCheckboxInput(id,label,initialValue,onChange) {
+    console.log(initialValue)
+
+    let checkInput = document.createElement('div');
+
+    checkInput.style = `
+        margin-top: 20px;
+    `;
+
+    // add label
+    let checkLabel = document.createElement('div');
+    checkLabel.style = `
+        align-self: center;
+        margin-right: 5px;
+        font-weight: bold;
+    `;
+    checkLabel.innerHTML = label;
+    checkInput.appendChild(checkLabel);
+
+    // checkbox
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox'
+    checkbox.onchange = onChange;
+    if(initialValue) {
+        checkbox.checked = initialValue
+    }
+    checkbox
+    checkInput.appendChild(checkbox);
+
+    return checkInput;
 
 } 
 

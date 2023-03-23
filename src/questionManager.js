@@ -206,8 +206,8 @@ function removeCategory(category) {
 }
 
 
-function addQuestion(category,question,answer,type,value) {
-    console.log(type)
+function addQuestion(category,question,answer,type,value,dailyDouble) {
+    console.log(dailyDouble)
 
     let game = getGame();
 
@@ -217,7 +217,8 @@ function addQuestion(category,question,answer,type,value) {
                 question: question,
                 answer: answer,
                 type: type,
-                value: value
+                value: value,
+                dailyDouble: dailyDouble
             })
         }
     })
@@ -228,7 +229,7 @@ function addQuestion(category,question,answer,type,value) {
 
 }
 
-function editQuestion(category,question,questionQuestion,answer,type,value) {
+function editQuestion(category,question,questionQuestion,answer,type,value,dailyDouble) {
     let game = getGame();
 
     game.categories.forEach((c) => {
@@ -240,6 +241,7 @@ function editQuestion(category,question,questionQuestion,answer,type,value) {
                     q.answer = answer;
                     q.type = type;
                     q.value = value;
+                    q.dailyDouble = dailyDouble;
                 }
             })
         }
@@ -277,6 +279,7 @@ function questionsForm(category,q=null) {
     let answer = '';
     let type = 'text';
     let value = 10;
+    let dailyDouble = false;
     let possibleTypes = ['text','image','video']
     let possibleValues = [10,20,30,40,50]
 
@@ -285,6 +288,7 @@ function questionsForm(category,q=null) {
         answer = q.answer;
         type = q.type;
         value = q.value;
+        dailyDouble = q.dailyDouble;
     }
 
     let form = document.createElement('div');
@@ -311,6 +315,16 @@ function questionsForm(category,q=null) {
         createSelectInput('questionValues'+category.id,'Value',possibleValues,value,(e) => value = e.target.value)
     )
 
+    form.appendChild(
+        createCheckboxInput('questionDailyDouble','Daily Double',dailyDouble,(e) => {
+            if(e.target.checked) {
+                dailyDouble = true;
+            } else {
+                dailyDouble = false;
+            }
+        })
+    )
+
     let spacer = document.createElement('div')
     spacer.style = `
         margin-top: 10px;
@@ -319,11 +333,11 @@ function questionsForm(category,q=null) {
     
     if(q) {
         form.appendChild(
-            createButton('questionUpdate'+category.id,'Update',() => editQuestion(category,q,question,answer,type,value))
+            createButton('questionUpdate'+category.id,'Update',() => editQuestion(category,q,question,answer,type,value,dailyDouble))
         )
     } else {
         form.appendChild(
-            createButton('questionSave'+category.id,'Save',() => addQuestion(category,question,answer,type,value))
+            createButton('questionSave'+category.id,'Save',() => addQuestion(category,question,answer,type,value,dailyDouble))
         )
     }
 

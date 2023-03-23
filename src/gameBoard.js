@@ -155,7 +155,7 @@ function showBoard() {
         // add questions
         c.questions.forEach((q) => {
 
-            if(q.answered == false) {
+            if(!questionAnswered(q)) {
                 let question = document.createElement('div');
                 question.className = 'jeopardyCard'
                 question.innerHTML = q.value
@@ -176,6 +176,23 @@ function showBoard() {
 
     return gameBoard;
 
+}
+
+function questionAnswered(q) {
+
+    let game = getGame();
+
+    let answered = false;
+
+    game.teams.forEach((t) => {
+        t.questions.forEach((teamQuestion) => {
+            if(q.question == teamQuestion.question) {
+                answered = true;
+            }
+        })
+    })
+
+    return answered;
 }
 
 function showGameQuestion(c,q) {
@@ -246,20 +263,6 @@ function updateTeamScore(team,category,question) {
             t.questions.push(question);
         }
     })
-
-    
-
-    // update question
-    game.game.categories.forEach((c) => {
-        if(c.id == category.id) {
-            c.questions.forEach((q) => {
-                if(q.question == question.question) {
-                    q.answered = true;
-                }
-            })
-        }
-    })
-
 
     writeGame(game);
     showPage(gameBoard);
