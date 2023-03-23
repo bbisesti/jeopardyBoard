@@ -75,7 +75,6 @@ function gameBoard() {
 
     gb.appendChild(menuRow);
 
-
     // Cards
     let bodyRow = document.createElement('div');
     bodyRow.style = `
@@ -89,6 +88,11 @@ function gameBoard() {
     }
 
     gb.appendChild(bodyRow);
+
+    // check if all questions are answered
+    if(checkAnswered()) {
+        console.log('Final Jeopardy!')
+    }
 
 
     return gb;
@@ -233,7 +237,7 @@ function showGameQuestion(c,q) {
         showDailyDoubleFanfare()
         setTimeout(() =>{ 
             closeModal();
-            modal = showBettingQuestion(c,q)
+            modal = showBettingQuestion(q)
 
             document.getElementById('modalSection').appendChild(
                 showJeopardyModal(modal)
@@ -388,7 +392,7 @@ function removeTeamQuestion(team,question) {
     closeModal()
 }
 
-function showBettingQuestion(c,q) {
+function showBettingQuestion(q) {
 
     let modal = document.createElement('div');
 
@@ -505,4 +509,44 @@ function applyCurrentBet(teamId,question,correct) {
     writeGame(game)
     showPage(gameBoard)
     alert('Score applied!')
+}
+
+function showFinalJeopardy() {
+    
+    let game = getGame();
+
+    let modal = showBettingQuestion({
+        id: 'finalJeopardy',
+        question: game.finalJeopardyQuestion
+    })
+
+    document.getElementById('modalSection').appendChild(
+        showJeopardyModal(modal)
+    );
+
+}
+
+
+function checkAnswered() {
+
+    let game = getGame();
+
+    let totalQuestions = 0;
+    game.game.categories.forEach((c) => {
+        totalQuestions += c.questions.length;
+    })
+    
+    let teamQuestions = 0
+    game.teams.forEach((t) => {
+        teamQuestions += t.questions.length;
+    })
+
+    console.log(teamQuestions == totalQuestions)
+    
+    // if question lengths are the same then final Jeopardy
+    if(teamQuestions == totalQuestions) {
+        showFinalJeopardy()
+    }
+    
+
 }
