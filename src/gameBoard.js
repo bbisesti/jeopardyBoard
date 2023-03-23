@@ -44,7 +44,7 @@ function gameBoard() {
     )
 
     menuButtons.appendChild(
-        createButton('addTeam','Question Manager',() => addTeam())
+        createButton('questionButton','Question Manager',() => manageQuestions())
     )
 
     menuRow.appendChild(menuButtons)
@@ -53,9 +53,11 @@ function gameBoard() {
     let scores = document.createElement('div');
     scores.style = `
         flex-grow: 1;
-        color: yellow;
         display: grid;
-        grid-template-columns: repeat(` + game.teams.length + `,100px);
+        grid-template-columns: repeat(` + game.teams.length + `,400px);
+        gap: 20px;
+        justify-content: right;
+        padding-right: 50px;
     `
 
     game.teams.forEach((t) => {
@@ -99,27 +101,10 @@ function saveGame() {
 
 function manageTeams() {
 
-    let el = document.createElement('div');
-    el.innerHTML = 'blah';
-
-    document.getElementById('modalSection').appendChild(
-        showModal('teamManager',el)
-    )
+    updateModal(teamManager)
     
 }
 
-function addTeam() {
-    let team = prompt('Please Input a team name')
-
-    if(team) {
-        let game = getGame();
-
-        game.teams.push({
-            name: team,
-            questions: []
-        })
-
-        writeGame(game);
-    }
-
+function manageQuestions() {
+    updateModal(questionManager);
 }
