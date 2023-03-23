@@ -57,7 +57,7 @@ function gameBoard() {
     scores.style = `
         flex-grow: 1;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 20px;
         justify-content: center;
         align-items: center;
@@ -65,9 +65,9 @@ function gameBoard() {
     `
 
     game.teams.forEach((t) => {
-        scores.appendChild(
-            createScoreCard(t,() => openTeamHistory(t))
-        )
+            scores.appendChild(
+                createScoreCard(t,() => openTeamHistory(t))
+            )
     })
 
     menuRow.appendChild(scores)
@@ -161,7 +161,6 @@ function showBoard() {
 
         // add questions
         c.questions.forEach((q) => {
-
             if(!questionAnswered(q)) {
                 let question = document.createElement('div');
                 question.className = 'jeopardyCard'
@@ -193,7 +192,8 @@ function questionAnswered(q) {
 
     game.teams.forEach((t) => {
         t.questions.forEach((teamQuestion) => {
-            if(q.question == teamQuestion.question) {
+            if(q.id == teamQuestion.id) {
+                console.log(q.id + ' - ' + t.id)
                 answered = true;
             }
         })
@@ -252,6 +252,9 @@ function showGameQuestion(c,q) {
     modalContent.className = 'jeopardyCardLarge'
 
     modalContent.innerHTML = q.question;
+    modalContent.onclick = () => {
+        modalContent.innerHTML = q.answer;
+    }
     modal.appendChild(modalContent)
 
     // add footer
@@ -289,7 +292,6 @@ function showGameQuestion(c,q) {
         footer.appendChild(teamButton)
 
     })
-    
     modal.appendChild(footer);
 
     document.getElementById('modalSection').appendChild(
@@ -303,7 +305,6 @@ function showGameQuestion(c,q) {
 
 function updateTeamScore(team,category,question) {
 
-
     let game = getGame();
 
     // update team questions
@@ -312,6 +313,9 @@ function updateTeamScore(team,category,question) {
             t.questions.push(question);
         }
     })
+
+
+    
 
     writeGame(game);
     showPage(gameBoard);
@@ -401,6 +405,9 @@ function showBettingQuestion(q) {
     modalContent.className = 'jeopardyCardLarge'
 
     modalContent.innerHTML = q.question;
+    modalContent.onclick = () => {
+        modalContent.innerHTML = q.answer;
+    }
     modal.appendChild(modalContent)
 
     // add footer
@@ -424,34 +431,36 @@ function showBettingQuestion(q) {
 
     game.teams.forEach((t) => {
 
-        let bettingForm = document.createElement('div');
-        bettingForm.style = `
-            width: 100%;
-        `
+        if(t.id != 'wrong') {
+            let bettingForm = document.createElement('div');
+            bettingForm.style = `
+                width: 100%;
+            `
 
-        bettingForm.appendChild(
-            createTextInput(t.id+'bettingForm',t.name + ' Bet','',(e) => updateCurrentTeamBet(t.id,e.target.value))
-        )
+            bettingForm.appendChild(
+                createTextInput(t.id+'bettingForm',t.name + ' Bet','',(e) => updateCurrentTeamBet(t.id,e.target.value))
+            )
 
-        let buttonsDiv = document.createElement('div');
-        buttonsDiv.style = `
-            margin-top: 10px;
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-            gap: 10px;
-        `;
+            let buttonsDiv = document.createElement('div');
+            buttonsDiv.style = `
+                margin-top: 10px;
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                gap: 10px;
+            `;
 
-        buttonsDiv.appendChild(
-            correctButton = createButton(t.id+'bettingFormCorrect','Correct',() => applyCurrentBet(t.id,q,true))
-        )
+            buttonsDiv.appendChild(
+                correctButton = createButton(t.id+'bettingFormCorrect','Correct',() => applyCurrentBet(t.id,q,true))
+            )
 
-        buttonsDiv.appendChild(
-            createButton(t.id+'bettingFormIncorrect','Incorrect',() => applyCurrentBet(t.id,q,false))
-        )
-        bettingForm.appendChild(buttonsDiv)
+            buttonsDiv.appendChild(
+                createButton(t.id+'bettingFormIncorrect','Incorrect',() => applyCurrentBet(t.id,q,false))
+            )
+            bettingForm.appendChild(buttonsDiv)
 
 
-        footer.appendChild(bettingForm)
+            footer.appendChild(bettingForm)
+        }
 
     })
 
@@ -541,8 +550,6 @@ function checkAnswered() {
         teamQuestions += t.questions.length;
     })
 
-    console.log(teamQuestions == totalQuestions)
-    
     // if question lengths are the same then final Jeopardy
     if(teamQuestions == totalQuestions) {
         showFinalJeopardy()
