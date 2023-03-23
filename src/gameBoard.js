@@ -75,13 +75,13 @@ function gameBoard() {
     // Cards
     let bodyRow = document.createElement('div');
     bodyRow.style = `
-        flex-grow: 1;
-        display: grid;
-        border: 1px solid red;
-        color: yellow;
-        text-align: center;
+        width: 100%;
+        height: 90%;
+        display: flex;
     `;
-    bodyRow.innerHTML = 'cards'
+
+    bodyRow.appendChild(showBoard())
+
     gb.appendChild(bodyRow);
 
 
@@ -107,4 +107,56 @@ function manageTeams() {
 
 function manageQuestions() {
     updateModal(questionManager);
+}
+
+function showBoard() {
+
+    let game = getGame();
+
+    let gameBoard = document.createElement('div');
+    gameBoard.style = `
+        display: flex;
+        flex-grow: 1;
+        width: 100%;
+        flex-direction: row;
+        gap: 10px;
+        margin: 20px 10px 0px 10px;
+    `;
+
+
+    // show titles
+    game.game.categories.forEach((c) => {
+        
+        let categoryDiv = document.createElement('div');
+        categoryDiv.style = `
+            width: 100%;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-content: center;
+        `
+
+        // title
+        let title = document.createElement('div');
+        title.className = 'jeopardyCard'
+        title.innerHTML = c.name
+        categoryDiv.appendChild(title);
+
+        // add questions
+        c.questions.forEach((q) => {
+
+            let question = document.createElement('div');
+            question.className = 'jeopardyCard'
+            question.innerHTML = q.value
+            categoryDiv.appendChild(question)
+
+        })
+
+        gameBoard.appendChild(categoryDiv);
+    })
+
+    return gameBoard;
+
 }

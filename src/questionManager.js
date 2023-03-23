@@ -130,7 +130,6 @@ function showQuestions(category) {
         `
         name.innerHTML = q.question;
         name.onclick = () => {
-            console.log(q)
             showQuestionsForm(category,q)
         }
         b.appendChild(name);
@@ -208,6 +207,7 @@ function removeCategory(category) {
 
 
 function addQuestion(category,question,answer,type,value) {
+    console.log(type)
 
     let game = getGame();
 
@@ -276,7 +276,7 @@ function questionsForm(category,q=null) {
     let question = '';
     let answer = '';
     let type = 'text';
-    let value = 200;
+    let value = 10;
     let possibleTypes = ['text','image','video']
     let possibleValues = [10,20,30,40,50]
 

@@ -2,12 +2,65 @@
 
 function loadGame() {
 
-    if(localStorage.getItem('game')) {
-        // load and show game page
-        showPage(gameBoard);
+    let game = getGame();
+
+    if(game) {
+        
+        // load game
+        if(game.game) {
+            showPage(gameBoard)
+        } else {
+            createGame();
+            showPage(gameBoard);
+        }
     } else {
         showPage(loadFilePage);
     }
+}
+
+function createGame() {
+
+    // get game
+    let game = getGame();
+
+    let newGame = {
+        categories: []
+    }
+
+    game.categories.forEach((c) => {
+        newGame.categories.push({
+            id: c.id,
+            name: c.name,
+            questions: []
+        })
+    })
+
+    // add random question worth correct amount of points to game
+    newGame.categories.forEach((c) => {
+        let gameCategory = game.categories.filter((gc) => gc.id == c.id)[0]
+
+        c.questions.push(getQuestion(gameCategory.questions,10))
+        c.questions.push(getQuestion(gameCategory.questions,20))
+        c.questions.push(getQuestion(gameCategory.questions,30))
+        c.questions.push(getQuestion(gameCategory.questions,40))
+        c.questions.push(getQuestion(gameCategory.questions,50))
+
+        c.questions.sort((a,b) => a.value - b.value)
+    })
+
+    
+    game.game = newGame;
+    writeGame(game);
+
+
+}
+
+function getQuestion(allQuestions,pointValue) {
+    console.log('here!')
+    let pertinentQuestions = allQuestions.filter((q) => q.value == pointValue)
+    let index = Math.round(Math.random() * (pertinentQuestions.length - 1) + 0)
+    let question = pertinentQuestions[index]
+    return question
 }
 
 /**
@@ -403,14 +456,16 @@ function createSelectInput(id,label,options,initialValue,onChange) {
         padding: 5px;
         font-size: 15px;
     `;
-    select.value = initialValue;
-    select.onChange = onChange;
+    select.onchange = onChange
 
     // add options
     options.forEach((o) => {
         
         let option = document.createElement('option');
-
+        if(o == initialValue) {
+            option.selected = true;
+        }
+        option.id = id +o;
         option.value = o;
         option.innerHTML = o;
 
