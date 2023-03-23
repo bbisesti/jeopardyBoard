@@ -231,20 +231,30 @@ function showBettingQuestion(c,q) {
     game.teams.forEach((t) => {
 
         let bettingForm = document.createElement('div');
+        bettingForm.style = `
+            width: 100%;
+        `
 
         bettingForm.appendChild(
             createTextInput(t.id+'bettingForm',t.name + ' Bet','',(e) => updateCurrentTeamBet(t.id,e.target.value))
         )
 
-        let correctButton = createButton(t.id+'bettingFormCorrect','Correct',() => applyCurrentBet(true))
+        let buttonsDiv = document.createElement('div');
+        buttonsDiv.style = `
+            margin-top: 10px;
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+        `;
 
-        bettingForm.appendChild(
-            correctButton
+        buttonsDiv.appendChild(
+            correctButton = createButton(t.id+'bettingFormCorrect','Correct',() => applyCurrentBet(t.id,q,true))
         )
 
-        bettingForm.appendChild(
-            createButton(t.id+'bettingFormIncorrect','Incorrect',() => applyCurrentBet(false))
+        buttonsDiv.appendChild(
+            createButton(t.id+'bettingFormIncorrect','Incorrect',() => applyCurrentBet(t.id,q,false))
         )
+        bettingForm.appendChild(buttonsDiv)
 
 
         footer.appendChild(bettingForm)
@@ -253,6 +263,19 @@ function showBettingQuestion(c,q) {
 
     
     modal.appendChild(footer);
+
+    let doneButtonDiv = document.createElement('div');
+    doneButtonDiv.style = `
+        width: 99.4%;
+        background-color: #FEFEFE;
+    `
+    doneButtonDiv.appendChild(
+        createButton('closeDailyDoubleButton','Done',() => closeModal())
+    )
+
+    modal.appendChild(
+        doneButtonDiv
+    )
 
     return modal;
 
@@ -269,6 +292,29 @@ function updateCurrentTeamBet(teamId,currentBet) {
     })
 
     writeGame(game);
+}
+
+function applyCurrentBet(teamId,question,correct) {
+
+    let game = getGame();
+
+    game.teams.forEach((t) => {
+        if(t.id == teamId) {
+            
+            if(correct) {
+                question.value = Number(t.currentBet);
+            } else {
+                question.value = -Number(t.currentBet)
+            }
+
+            t.questions.push(question);
+            
+        }
+    })
+
+    writeGame(game)
+    showPage(gameBoard)
+    alert('Score applied!')
 }
 
 function showGameQuestion(c,q) {
