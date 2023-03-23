@@ -61,7 +61,6 @@ function createGame() {
 }
 
 function getQuestion(allQuestions,pointValue) {
-    console.log('here!')
     let pertinentQuestions = allQuestions.filter((q) => q.value == pointValue)
     let index = Math.round(Math.random() * (pertinentQuestions.length - 1) + 0)
     let question = pertinentQuestions[index]
@@ -329,7 +328,8 @@ function showJeopardyModal(content){
     closeButton.onclick = () => closeModal();
     let closeIcon = document.createElement('span');
     closeIcon.style = `
-        background-color: #060ce9;
+        margin-left: 10px;
+        text-align: center;
     `
     closeIcon.innerHTML = '&times;'
     closeButton.appendChild(closeIcon);

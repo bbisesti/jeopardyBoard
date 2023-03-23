@@ -205,18 +205,20 @@ function showGameQuestion(c,q) {
     modalContent.className = 'jeopardyCardLarge'
 
     modalContent.innerHTML = q.question;
-    modal.appendChild(modalContent);
+    modal.appendChild(modalContent)
 
     // add footer
     let footer = document.createElement('div');
     footer.style = `
-        width: 100%;
+        width: 98.3%;
         display: inline-flex;
         gap: 10px;
         justify-content: center;
         padding: 5px;
         background-color: white;
         color: black;
+        border-radius-bottom-right: 5px;
+        border-radius-botom-left: 5px;
     `
 
     let game = getGame();
@@ -242,6 +244,7 @@ function showGameQuestion(c,q) {
     })
     
     modal.appendChild(footer);
+    
 
 
 
