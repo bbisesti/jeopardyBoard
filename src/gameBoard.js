@@ -147,6 +147,9 @@ function showBoard() {
         let title = document.createElement('div');
         title.className = 'jeopardyCard'
         title.innerHTML = c.name
+        title.style = `
+            text-decoration: underline;
+        `
         categoryDiv.appendChild(title);
 
         // add questions
