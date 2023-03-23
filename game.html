@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>Nursing Jeopardy</title>
+
+        <!-- Global Styles -->
+        <style type="text/css">
+            body {
+                margin: 10px;
+                background-color: #000000;
+                font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            }
+
+            .jeopardyCard {
+                display: flex;
+                flex-grow: 1;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-content: center;
+                color: yellow;
+                font-size: 30px;
+                background-color: #060ce9;
+                padding: 20px;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+
+            .jeopardyCardLarge {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                color: white;
+                font-size: 50px;
+                background-color: #060ce9;
+                padding: 100px;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+
+            @keyframes animatetop {
+                from {top: -300px; opacity: 0;}
+                to {top: 0; opacity: 1}
+            }
+
+            @keyframes animateleft {
+                from {left: -300px; opacity: 0}
+                to {left: 0; opacity: 1}
+            }
+        </style>
+    </head>
+    <body>
+        <div id="game"></div>
+        <div id="modalSection"></div>
+
+        <script src="src/utils.js"></script>
+        <script src="src/gameBoard.js"></script>
+        <script src="src/loadFilePage.js"></script>
+        <script src="src/teamManager.js"></script>
+        <script src="src/questionManager.js"></script>
+
+        <script type="text/javascript">
+            loadGame();
+        </script>
+    </body>
+</html>
