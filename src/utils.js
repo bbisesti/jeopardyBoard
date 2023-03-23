@@ -10,7 +10,6 @@ function loadGame() {
         if(game.game) {
             showPage(gameBoard)
         } else {
-            createGame();
             showPage(gameBoard);
         }
     } else {
@@ -60,6 +59,7 @@ function getQuestion(allQuestions,pointValue) {
     let pertinentQuestions = allQuestions.filter((q) => q.value == pointValue)
     let index = Math.round(Math.random() * (pertinentQuestions.length - 1) + 0)
     let question = pertinentQuestions[index]
+    question.answered = false;
     return question
 }
 
@@ -277,6 +277,60 @@ function showModal(content){
     modalContent.appendChild(closeButton);
 
     modal.appendChild(modalContent);
+
+    return modal;
+
+    
+
+}
+
+function showJeopardyModal(content){
+
+    // Add body
+    let modal = document.createElement('div');
+    modal.style = `
+        display: inline-flex;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgb(0,0,0,0.4);
+    `
+
+    // Add Content
+    let modalContent = document.createElement('div');
+    modalContent.style = `
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        margin: auto;
+        padding: 0;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    `
+    modalContent.appendChild(content);
+
+    let closeButton = document.createElement('div');
+    closeButton.style = `
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+    `
+    closeButton.onclick = () => closeModal();
+    let closeIcon = document.createElement('span');
+    closeIcon.style = `
+        background-color: #060ce9;
+    `
+    closeIcon.innerHTML = '&times;'
+    closeButton.appendChild(closeIcon);
+    modalContent.appendChild(closeButton);
+
+    modal.appendChild(modalContent);
+
 
     return modal;
 

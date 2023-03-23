@@ -5,8 +5,9 @@
         <!-- Global Styles -->
         <style type="text/css">
             body {
-                margin: 5px;
+                margin: 10px;
                 background-color: #000000;
+                font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             }
 
             .jeopardyCard {
@@ -21,6 +22,28 @@
                 padding: 20px;
                 border-radius: 5px;
                 font-weight: bold;
+            }
+
+            .jeopardyCardLarge {
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                color: white;
+                font-size: 50px;
+                background-color: #060ce9;
+                padding: 100px;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+
+            @keyframes animatetop {
+                from {top: -300px; opacity: 0;}
+                to {top: 0; opacity: 1}
+            }
+
+            @keyframes animateleft {
+                from {left: -300px; opacity: 0}
+                to {left: 0; opacity: 1}
             }
         </style>
     </head>
