@@ -22,6 +22,8 @@ function createGame() {
     // get game
     let game = getGame();
 
+    let totalDailyDoubles = 2;
+
     let newGame = {
         categories: []
     }
@@ -47,7 +49,58 @@ function createGame() {
         c.questions.sort((a,b) => a.value - b.value)
     })
 
+
+    // Determine amount of daily doubles and replace if needed
+    let dds = []
+    newGame.categories.forEach((c) => {
+        c.questions.forEach((q) => {
+            if(q.dailyDouble) {
+                dds.push({
+                    'categoryId':c.id,
+                    'questionId': q.id
+                });
+            }
+        })
+    })
+
+    /*
+    TODO - update to allow for more than 2 daily doubles
+    console.log('Daily Double Length: ' + dds.length)
     
+    while(dds.length > totalDailyDoubles) {
+        console.log(dds)
+
+        let dailyDoubleToRemove = dds[0]
+
+        newGame.categories.forEach((c,ci) => {
+            if(c.id == dailyDoubleToRemove.categoryId) {
+                console.log('ci: ' + ci)
+                c.questions.forEach((q,qi) => {
+                    console.log('qi: ' + qi)
+                    if(q.id == dailyDoubleToRemove.questionId) {
+                        console.log('splicing: ' + qi)
+                        // splice
+                        c.questions.splice(qi,1);
+
+                        // add new
+                        let gameCategory = game.categories.filter((gc) => gc.id == c.id)[0]
+                        c.questions.push(getQuestion(gameCategory.questions,q.value,true))
+                        console.log('adding new question!')
+
+                        // remove DDS
+                        dds = dds.splice(0,1);
+                        return;
+                    }
+                })
+
+                // re-sort
+                c.questions.sort((a,b) => a.value - b.value)
+            }
+        })
+    }
+    */
+
+    // Set New Game
     game.game = newGame;
 
     // blank out team answers
@@ -60,11 +113,16 @@ function createGame() {
 
 }
 
-function getQuestion(allQuestions,pointValue) {
-    let pertinentQuestions = allQuestions.filter((q) => q.value == pointValue)
+function getQuestion(allQuestions,pointValue,filterDailyDouble=false) {
+    let pertinentQuestions = []
+    if(filterDailyDouble) {
+        pertinentQuestions = allQuestions.filter((q) => q.value == pointValue && q.dailyDouble == false)
+    } else {
+        pertinentQuestions = allQuestions.filter((q) => q.value == pointValue)
+    }
+     
     let index = Math.round(Math.random() * (pertinentQuestions.length - 1) + 0)
     let question = pertinentQuestions[index]
-    question.answered = false;
     return question
 }
 
@@ -224,7 +282,7 @@ function createScoreCard(team,onClick) {
 
     let teamScore = 0;
     team.questions.forEach((q) => {
-        teamScore += q.value;
+        teamScore += Number(q.value);
     });
 
     let score = document.createElement('span');

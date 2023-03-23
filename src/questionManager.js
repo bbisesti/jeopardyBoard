@@ -214,6 +214,7 @@ function addQuestion(category,question,answer,type,value,dailyDouble) {
     game.categories.forEach((c) => {
         if(c.id == category.id) {
             c.questions.push({
+                id: uuidv4(),
                 question: question,
                 answer: answer,
                 type: type,

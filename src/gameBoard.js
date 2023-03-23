@@ -58,9 +58,10 @@ function gameBoard() {
     scores.style = `
         flex-grow: 1;
         display: grid;
-        grid-template-columns: repeat(` + game.teams.length + `,400px);
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 20px;
-        justify-content: right;
+        justify-content: center;
+        align-items: center;
         padding-right: 50px;
     `
 
@@ -149,7 +150,9 @@ function showBoard() {
         title.innerHTML = c.name
         title.style = `
             text-decoration: underline;
+            color: white;
         `
+        
         categoryDiv.appendChild(title);
 
         // add questions
@@ -195,10 +198,88 @@ function questionAnswered(q) {
     return answered;
 }
 
-function showGameQuestion(c,q) {
-    
+function showBettingQuestion(c,q) {
 
     let modal = document.createElement('div');
+
+    let modalContent = document.createElement('div');
+    modalContent.id = q.id+'jeopardyQuestion'
+    modalContent.className = 'jeopardyCardLarge'
+
+    modalContent.innerHTML = q.question;
+    modal.appendChild(modalContent)
+
+    // add footer
+    let footer = document.createElement('div');
+    footer.style = `
+        width: 98.3%;
+        display: inline-flex;
+        gap: 10px;
+        justify-content: center;
+        padding: 5px;
+        background-color: white;
+        color: black;
+        border-radius-bottom-right: 5px;
+        border-radius-botom-left: 5px;
+    `
+    
+    
+
+    // add team betting forms
+    let game = getGame();
+
+    game.teams.forEach((t) => {
+
+        let bettingForm = document.createElement('div');
+
+        bettingForm.appendChild(
+            createTextInput(t.id+'bettingForm',t.name + ' Bet','',(e) => updateCurrentTeamBet(t.id,e.target.value))
+        )
+
+        let correctButton = createButton(t.id+'bettingFormCorrect','Correct',() => applyCurrentBet(true))
+
+        bettingForm.appendChild(
+            correctButton
+        )
+
+        bettingForm.appendChild(
+            createButton(t.id+'bettingFormIncorrect','Incorrect',() => applyCurrentBet(false))
+        )
+
+
+        footer.appendChild(bettingForm)
+
+    })
+
+    
+    modal.appendChild(footer);
+
+    return modal;
+
+}
+
+function updateCurrentTeamBet(teamId,currentBet) {
+
+    let game = getGame();
+
+    game.teams.forEach((t) => {
+        if(t.id == teamId) {
+            t.currentBet = currentBet
+        }
+    })
+
+    writeGame(game);
+}
+
+function showGameQuestion(c,q) {
+
+    let modal = document.createElement('div');
+
+    if(q.dailyDouble) {
+    
+        modal = showBettingQuestion(c,q);
+
+    } else {
 
     let modalContent = document.createElement('div');
     modalContent.id = q.id+'jeopardyQuestion'
@@ -244,9 +325,8 @@ function showGameQuestion(c,q) {
     })
     
     modal.appendChild(footer);
-    
 
-
+    }
 
     document.getElementById('modalSection').appendChild(
         showJeopardyModal(modal)
