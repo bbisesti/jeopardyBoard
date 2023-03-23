@@ -1,0 +1,27 @@
+{"teams":[{
+    "name":"asdf","color": "red","questions":[]}],"categories":[
+    {
+        "name": "Neuro",
+        "questions": []
+    },
+    {
+        "name": "GU",
+        "questions": []
+    },
+    {
+        "name": "Fluid & Electrolytes",
+        "questions": []
+    },
+    {
+        "name": "Nutrition",
+        "questions": []
+    },
+    {
+        "name": "Abdominal",
+        "questions": []
+    },
+    {
+        "name": "Neuro",
+        "questions": []
+    }
+]}
