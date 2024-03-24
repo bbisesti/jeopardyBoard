@@ -87,6 +87,7 @@ function gameBoard() {
         bodyRow.appendChild(showBoard())
 
         // check if all questions are answered
+
         if(checkAnswered()) {
             console.log('Final Jeopardy!')
         }
@@ -335,7 +336,7 @@ function openTeamHistory(team) {
         margin-bottom: 20px;
         gap: 20px;
         color: yellow;
-        font-weight: bold;
+        
         text-align: center;
     `
 
@@ -361,7 +362,7 @@ function openTeamHistory(team) {
         let close = document.createElement('span');
         close.style = `
             font-size: 20px;
-            font-weight: bold;
+            
         `;
         close.innerHTML = '&times;';
         close.onclick = () => removeTeamQuestion(team,q);

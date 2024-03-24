@@ -30,7 +30,7 @@ function showCategories() {
         margin-bottom: 20px;
         gap: 20px;
         color: yellow;
-        font-weight: bold;
+        
         text-align: center;
     `;
 
@@ -60,7 +60,7 @@ function showCategories() {
         let close = document.createElement('span');
         close.style = `
             font-size: 20px;
-            font-weight: bold;
+            
         `;
         close.innerHTML = '&times;';
         close.onclick = () => removeCategory(c);
@@ -102,7 +102,7 @@ function showQuestions(category) {
         margin-bottom: 20px;
         gap: 20px;
         color: yellow;
-        font-weight: bold;
+        
         text-align: center;
     `;
 
@@ -138,7 +138,7 @@ function showQuestions(category) {
         let close = document.createElement('span');
         close.style = `
             font-size: 20px;
-            font-weight: bold;
+            
         `;
         close.innerHTML = '&times;';
         close.onclick = () => removeQuestion(category,q);

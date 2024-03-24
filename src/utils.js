@@ -246,7 +246,7 @@ function createButton(id,label,onClick) {
         padding: 10px;
         border-radius: 5px;
         text-align: center;
-        font-weight: bold;
+        
         background-color: #060ce9;
         color: yellow;
         `;
@@ -270,7 +270,7 @@ function createScoreCard(team,onClick=null) {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    font-weight: bold;
+    
     background-color: ` + team.color +`;
     color: white;
     
@@ -333,7 +333,7 @@ function showModal(content){
     let closeButton = document.createElement('div');
     closeButton.style = `
         font-size: 40px;
-        font-weight: bold;
+        
         margin-top: 20px;
         margin-right: 20px;
     `
@@ -382,7 +382,7 @@ function showJeopardyModal(content){
     let closeButton = document.createElement('div');
     closeButton.style = `
         font-size: 40px;
-        font-weight: bold;
+        
         color: white;
     `
     closeButton.onclick = () => closeModal();
@@ -429,7 +429,7 @@ function createCard(id,title,body,width,height,closeID=null) {
     cardTitle.style = `
         flex-grow: 1;
         font-size: 20px;
-        font-weight: bold;
+        
     `
     cardTitle.innerHTML = title;
     cardHeader.appendChild(cardTitle);
@@ -438,7 +438,7 @@ function createCard(id,title,body,width,height,closeID=null) {
         let cardClose = document.createElement('span');
         cardClose.style = `
             font-size: 20px;
-            font-weight: bold;
+            
         `
         cardClose.onClick = () => {
             document.getElementById(closeID).style.display = 'none';
@@ -490,7 +490,7 @@ function createTextInput(id,label,initialValue='',onChange) {
     textInputLabel.style = `
         align-self: center;
         margin-right: 5px;
-        font-weight: bold;
+        
     `
     textInputLabel.innerHTML = label;
     textInput.appendChild(textInputLabel);
@@ -528,7 +528,7 @@ function createTextAreaInput(id,label,rows,initialValue='',onChange) {
     textInputLabel.style = `
         align-self: center;
         margin-right: 5px;
-        font-weight: bold;
+        
     `
     textInputLabel.innerHTML = label;
     textAreaInput.appendChild(textInputLabel);
@@ -563,7 +563,7 @@ function createSelectInput(id,label,options,initialValue,onChange) {
     selectLabel.style = `
         align-self: center;
         margin-right: 5px;
-        font-weight: bold;
+        
     `;
     selectLabel.innerHTML = label;
     selectInput.appendChild(selectLabel);
@@ -615,7 +615,7 @@ function createCheckboxInput(id,label,initialValue,onChange) {
     checkLabel.style = `
         align-self: center;
         margin-right: 5px;
-        font-weight: bold;
+        
     `;
     checkLabel.innerHTML = label;
     checkInput.appendChild(checkLabel);

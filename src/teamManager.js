@@ -52,7 +52,7 @@ function teamManager() {
         let close = document.createElement('span');
         close.style = `
             font-size: 20px;
-            font-weight: bold;
+            
         `;
         close.innerHTML = '&times;';
         close.onclick = () => removeTeam(t);
