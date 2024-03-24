@@ -85,14 +85,14 @@ function gameBoard() {
 
     if(game.game) {
         bodyRow.appendChild(showBoard())
+
+        // check if all questions are answered
+        if(checkAnswered()) {
+            console.log('Final Jeopardy!')
+        }
     }
 
     gb.appendChild(bodyRow);
-
-    // check if all questions are answered
-    if(checkAnswered()) {
-        console.log('Final Jeopardy!')
-    }
 
 
     return gb;
