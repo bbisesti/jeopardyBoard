@@ -88,6 +88,7 @@ function gameBoard() {
 
         // check if all questions are answered
 
+        console.log('here!')
         if(checkAnswered()) {
             console.log('Final Jeopardy!')
         }
@@ -194,7 +195,6 @@ function questionAnswered(q) {
     game.teams.forEach((t) => {
         t.questions.forEach((teamQuestion) => {
             if(q.id == teamQuestion.id) {
-                console.log(q.id + ' - ' + t.id)
                 answered = true;
             }
         })
@@ -288,12 +288,47 @@ function showGameQuestion(c,q) {
             background-color: ` + t.color +`;
         `
         teamButton.innerHTML = t.name;
-        teamButton.onclick = () => updateTeamScore(t,c,q);
+        teamButton.onclick = () => updateTeamScore(t,c,q,true);
 
         footer.appendChild(teamButton)
 
     })
     modal.appendChild(footer);
+
+    // add incorrect
+    let incorrect = document.createElement('div');
+    incorrect.style = `
+        width: 98.3%;
+        display: inline-flex;
+        gap: 10px;
+        justify-content: center;
+        padding: 5px;
+        background-color: white;
+        color: black;
+        border-radius-bottom-right: 5px;
+        border-radius-botom-left: 5px;
+    `
+    game.teams.forEach((t) => {
+
+        let teamButton = document.createElement('div')
+        teamButton.style = `
+            display: flex;
+            flex-grow: 1;
+            padding: 10px;
+            align-self: center;
+            align-content: center;
+            justify-content: center;
+            color: white;
+            background-color: ` + t.color +`;
+        `
+        teamButton.innerHTML = t.name + '- incorrect';
+        teamButton.onclick = () => updateTeamScore(t,c,q,false);
+
+        incorrect.appendChild(teamButton)
+
+    })
+
+    modal.appendChild(incorrect)
 
     document.getElementById('modalSection').appendChild(
         showJeopardyModal(modal)
@@ -304,23 +339,39 @@ function showGameQuestion(c,q) {
     
 }
 
-function updateTeamScore(team,category,question) {
+function updateTeamScore(team,category,question,correct) {
 
     let game = getGame();
-
-    // update team questions
-    game.teams.forEach((t) => {
-        if(t.id == team.id) {
-            t.questions.push(question);
-        }
-    })
-
-
     
+
+    if(!correct) {
+        let newQuestion = question
+        newQuestion.value = question.value * -1
+        // update team questions
+        game.teams.forEach((t) => {
+            if(t.id == team.id) {
+                t.questions.push(newQuestion);
+            }
+        })
+
+        
+    } else {
+        let nq = question
+        nq.answered = true
+        // update team questions
+        game.teams.forEach((t) => {
+            if(t.id == team.id) {
+                t.questions.push(nq);
+            }
+        })
+    }
 
     writeGame(game);
     showPage(gameBoard);
-    closeModal();
+
+    if(correct) {
+        closeModal()
+    }
 
 }
 
@@ -522,6 +573,8 @@ function applyCurrentBet(teamId,question,correct) {
 }
 
 function showFinalJeopardy() {
+
+    console.log('showing final jeopardy')
     
     let game = getGame();
 
@@ -548,11 +601,17 @@ function checkAnswered() {
     
     let teamQuestions = 0
     game.teams.forEach((t) => {
-        teamQuestions += t.questions.length;
+        console.log(t.questions.filter((q) => q.answered).length)
+        teamQuestions += t.questions.filter((q) => q.answered).length;
+    })
+
+    let ddQuestions = 0
+    game.game.categories.forEach((c) => {
+        ddQuestions += c.questions.filter((q) => q.dailyDouble).length
     })
 
     // if question lengths are the same then final Jeopardy
-    if(teamQuestions == totalQuestions) {
+    if(teamQuestions == (totalQuestions - ddQuestions)) {
         showFinalJeopardy()
     }
     

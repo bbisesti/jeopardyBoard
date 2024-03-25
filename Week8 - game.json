@@ -1,5 +1,337 @@
 {
-    "teams": [],
+    "teams": [
+        {
+            "id": "e11141ac-abbb-41a2-bd9f-c2121b2bcf06",
+            "name": "Team 1",
+            "color": "red",
+            "questions": [
+                {
+                    "id": "17d61c81-cab7-4cfb-b8dd-b78dffd4e0da",
+                    "question": "An attack where a threat actor inserts themselves between a user and a web application is called?",
+                    "answer": "man-in-the-middle attack",
+                    "type": "text",
+                    "value": 10,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "8c8db702-f9f6-4ff4-a509-bd1c749c49cd",
+                    "question": "Software and code which can be freely used without restriction is called _____ ?",
+                    "answer": "Open Source",
+                    "type": "text",
+                    "value": 10,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "e8cc83de-da69-4026-9b8a-41f1ba1a7179",
+                    "question": "Nation State Actors are responsible for this type of attack, also known as APT",
+                    "answer": "Advanced Persistent Threat",
+                    "type": "text",
+                    "value": -10,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "25e151a3-d518-4b9f-b2fe-cd0999d2a6ab",
+                    "question": "A botnet hijacks a number of IoT toothbrushes and uses them to flood a website with bogus requests, what kind of attack are they conducting?",
+                    "answer": "DDOS",
+                    "type": "text",
+                    "value": -20,
+                    "dailyDouble": false
+                },
+                {
+                    "id": "9572da15-5c98-4b4b-811c-0b8970f3a2e5",
+                    "question": "This type of employee can assist with the security of your organization by sitting at a front desk and being the first point of contact for any visitor.  This ensures that a potential threat actor feels like they are always being observed",
+                    "answer": "Receptionist",
+                    "type": "text",
+                    "value": "20",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "ef39354f-1a73-4617-84d5-01669b09cc54",
+                    "question": "The _____ team is responsible for scanning for vulnerabilities and exploiting them",
+                    "answer": "Red Team",
+                    "type": "text",
+                    "value": -20,
+                    "dailyDouble": false
+                },
+                {
+                    "id": "6e48d345-1ab4-43cd-8252-9806e9f65b5f",
+                    "question": "A _____ algorithm uses both public and private keys to encrypt and decrypt data",
+                    "answer": "Asymmetric",
+                    "type": "text",
+                    "value": "20",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "fb9d4c86-44e2-4252-8abf-d78bd7f07dd1",
+                    "question": "This type of attack is responsible for the most malware delivery attempt due to its prevelance and ease of use",
+                    "answer": "Email",
+                    "type": "text",
+                    "value": -20,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "dcdebd43-d35d-455c-91d8-575da0d242ab",
+                    "question": "This type of detector can sense movement and potentially turn on lights or alert security personnel of potential danger",
+                    "answer": "Motion detector",
+                    "type": "text",
+                    "value": "30",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "18d2bb88-1935-4a66-8d7d-caaab9a8fff1",
+                    "question": "This form of malware is used to encrypt as many organizations' devices as possible and request a monetary sum be paid to decrypt their data",
+                    "answer": "Ransomware ",
+                    "type": "text",
+                    "value": "30",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "a33b5a25-ad8c-488c-93c6-70943c9547f2",
+                    "question": "This form of social engineering involves following authorized individuals into a room or building. Similar to following cars too closely on the highway",
+                    "answer": "Tailgating",
+                    "type": "text",
+                    "value": "30",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "7424d871-aa13-4a88-b6e5-fb7214b2c589",
+                    "question": "ARP poisoning and MAC address cloning are attacks conducted on this layer of the OSI networking chain?",
+                    "answer": "Layer 2",
+                    "type": "text",
+                    "value": "40",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "e304d946-e388-4f66-a1bc-df7d4a748246",
+                    "question": "_____ is when organizations offer a reward to the public for uncovering and reporting vulnerabilities",
+                    "answer": "Bug Bounty",
+                    "type": "text",
+                    "value": 100,
+                    "dailyDouble": true
+                },
+                {
+                    "id": "0ddbb2bf-cdf4-475c-9132-8592de105864",
+                    "question": "____ hat hackers are responsible for conducting penetration tests on organizations and (if done correctly) operate within legal parameters",
+                    "answer": "White Hat",
+                    "type": "text",
+                    "value": -40,
+                    "dailyDouble": false
+                },
+                {
+                    "id": "ecb5e81c-4a0c-4ff2-b66b-05f4995ff127",
+                    "question": "Visual Basic (or VBA) allows users to run macros (scripts) in their Microsoft Office applications.  When an Excel file is first opened Microsoft does not allow the end user to run any scripts by default.  What is this view known as?",
+                    "answer": "Protected View",
+                    "type": "text",
+                    "value": "50",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "f5c17727-ba67-42a8-8ce7-d598d8405cf8",
+                    "question": "A vestibule separating two areas, a public-facing area and a more secure area (such as a server room) which requires authenticating and closing one door before another is opened is known as a.  (acronym DMZ)",
+                    "answer": "Demilitarized Zone",
+                    "type": "text",
+                    "value": -230,
+                    "dailyDouble": true
+                },
+                {
+                    "id": "1e2606ef-b45a-4266-84ea-a614526892af",
+                    "question": "When a disgruntled employee plants malicious code into a legitimate program they have created a _____",
+                    "answer": "Logic Bomb",
+                    "type": "text",
+                    "value": "50",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "5ab01cf5-e93a-4e34-86a9-78199a0b5a6f",
+                    "question": "When white hat hackers mess up and accidentally do something illegal they become",
+                    "answer": "Gray hat hackers",
+                    "type": "text",
+                    "value": "50",
+                    "dailyDouble": false,
+                    "answered": true
+                }
+            ],
+            "currentBet": "230"
+        },
+        {
+            "id": "4a2b6140-edfa-47f2-bcc7-f95f3abf9714",
+            "name": "Team 2",
+            "color": "Blue",
+            "questions": [
+                {
+                    "id": "8e9dc6c5-3cce-49e9-a6b6-b1966766bd42",
+                    "question": "This type of barrier is usually tall and adorned with signage used to signify its intent and can come in chain-link, picket, or other varieties.",
+                    "answer": "Fence",
+                    "type": "text",
+                    "value": 10,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "81b6ffa2-3b7f-46df-baff-78529190d9a1",
+                    "question": "\"select * from table_name where field = 'whatever' or 1 = 1\" is known as a ____ attack",
+                    "answer": "SQL injection",
+                    "type": "text",
+                    "value": 10,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "6a8cda41-09b9-44ce-b30c-0688daafdbc8",
+                    "question": "This form of cryptography is used to hide data within other files",
+                    "answer": "Steganography",
+                    "type": "text",
+                    "value": 10,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "e8cc83de-da69-4026-9b8a-41f1ba1a7179",
+                    "question": "Nation State Actors are responsible for this type of attack, also known as APT",
+                    "answer": "Advanced Persistent Threat",
+                    "type": "text",
+                    "value": -10,
+                    "dailyDouble": false
+                },
+                {
+                    "id": "25e151a3-d518-4b9f-b2fe-cd0999d2a6ab",
+                    "question": "A botnet hijacks a number of IoT toothbrushes and uses them to flood a website with bogus requests, what kind of attack are they conducting?",
+                    "answer": "DDOS",
+                    "type": "text",
+                    "value": -20,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "ef39354f-1a73-4617-84d5-01669b09cc54",
+                    "question": "The _____ team is responsible for scanning for vulnerabilities and exploiting them",
+                    "answer": "Red Team",
+                    "type": "text",
+                    "value": -20,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "fb9d4c86-44e2-4252-8abf-d78bd7f07dd1",
+                    "question": "This type of attack is responsible for the most malware delivery attempt due to its prevelance and ease of use",
+                    "answer": "Email",
+                    "type": "text",
+                    "value": -20,
+                    "dailyDouble": false
+                },
+                {
+                    "id": "7dde99c6-52b9-40b3-9ce4-5e6d8e8e400e",
+                    "question": "You are sitting in Starbucks and a threat actor steals your session ID with your banks' website.  They are conducting what kind of attack?",
+                    "answer": "Session-Replay attack",
+                    "type": "text",
+                    "value": "30",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "56389c77-c854-4314-93ec-644b999ccc80",
+                    "question": "The _____ team is responsible for defending systems and monitoring for attacks",
+                    "answer": "Blue Team",
+                    "type": "text",
+                    "value": "30",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "3f73ca6a-1109-43c4-9e23-e33a63339a37",
+                    "question": "A _____ algorithm is typically used to validate that the original contents of a file have not been modified.  MD5 and SHA algorithms are examples of this",
+                    "answer": "Hash",
+                    "type": "text",
+                    "value": "30",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "c4cb2a6f-4bea-4a53-80f9-089ac3bbfa00",
+                    "question": "This type of device can be placed on doors and can be opened by using a key, fingerprint, code, or a variety of other biometrics",
+                    "answer": "Lock",
+                    "type": "text",
+                    "value": "40",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "8cf641fd-a3bf-4107-84ff-3f8ac01a1981",
+                    "question": "Unlike Ransomware, this version of malware attempts to hide a program on the target host to mine cryptocurrency",
+                    "answer": "cryptomalware",
+                    "type": "text",
+                    "value": "40",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "e304d946-e388-4f66-a1bc-df7d4a748246",
+                    "question": "_____ is when organizations offer a reward to the public for uncovering and reporting vulnerabilities",
+                    "answer": "Bug Bounty",
+                    "type": "text",
+                    "value": 100,
+                    "dailyDouble": true
+                },
+                {
+                    "id": "19e06128-38da-482c-a015-eff9fcdc25bf",
+                    "question": "RSA and ECC are samples of this type of algorithm which uses both public and private keys",
+                    "answer": "Asymmetric",
+                    "type": "text",
+                    "value": "40",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "0ddbb2bf-cdf4-475c-9132-8592de105864",
+                    "question": "____ hat hackers are responsible for conducting penetration tests on organizations and (if done correctly) operate within legal parameters",
+                    "answer": "White Hat",
+                    "type": "text",
+                    "value": -40,
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "f5c17727-ba67-42a8-8ce7-d598d8405cf8",
+                    "question": "A vestibule separating two areas, a public-facing area and a more secure area (such as a server room) which requires authenticating and closing one door before another is opened is known as a.  (acronym DMZ)",
+                    "answer": "Demilitarized Zone",
+                    "type": "text",
+                    "value": -250,
+                    "dailyDouble": true
+                },
+                {
+                    "id": "2e27c28d-d580-4c8f-945f-4441b84dd478",
+                    "question": "This document defines the scope, timing, authorization, communication, cleanup, and reporting of a penetration test and serves as the terms between the penetration testing team and the organization.",
+                    "answer": "Rules of Engagement",
+                    "type": "text",
+                    "value": "50",
+                    "dailyDouble": false,
+                    "answered": true
+                },
+                {
+                    "id": "0ca6cdb9-b190-4ed4-8f61-b2ae0e762dbb",
+                    "question": "This technology is a shared, immutable ledger that facilitates the process of recording transactions and tracking assets in a business network",
+                    "answer": "Blockchain",
+                    "type": "text",
+                    "value": "50",
+                    "dailyDouble": false,
+                    "answered": true
+                }
+            ],
+            "currentBet": "250"
+        }
+    ],
     "categories": [
         {
             "id": "0caafcb2-8a39-4861-a1a2-fbd94f6f0e3b",
@@ -558,6 +890,5 @@
             }
         ]
     },
-    "finalJeopardyQuestion":"What year was SHA-3 released by NIST?",
-    "finalJeopardyAnswer":"2015"
+    "finalJeopardyQuestion":"What is love?"
 }
